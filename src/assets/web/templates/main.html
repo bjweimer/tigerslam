@@ -1,0 +1,70 @@
+{{define "content"}}
+<div class="span4 module">
+	<h4>Robot</h4>
+	<table class="table">
+		<tr>
+			<td class="muted">Type</td>
+			<td>{{.DATA.CONTROLLER.Robot.TypeString}}</td>
+		</tr>
+		<tr>
+			<td class="muted">Base width</td>
+			<td>{{.DATA.CONTROLLER.Robot.GetParameters.BaseWidth}} m</td>
+		</tr>
+		<tr>
+			<td class="muted">Wheel radius</td>
+			<td>{{.DATA.CONTROLLER.Robot.GetParameters.WheelRadius}} m</td>
+		</tr>
+		<tr>
+			<td class="muted">Wheel ratio</td>
+			<td>{{.DATA.CONTROLLER.Robot.GetParameters.WheelRatio}}</td>
+		</tr>
+		<tr>
+			<td class="muted">Odometry PPR</td>
+			<td>{{.DATA.CONTROLLER.Robot.GetParameters.OdometryPPR}}</td>
+		</tr>
+	</table>
+</div>
+
+<div class="span4 module">
+	<h4>Sensors</h4>
+	<table class="table">
+		{{with .DATA.CONTROLLER.SensorController.Sensors}}
+			{{range .}}
+				<tr>
+					<th colspan="2">{{.GetTypeName}}</th>
+				</tr>
+				{{ with .GetParameters }}
+					{{range $index, $element := .}}
+						<tr>
+							<td>{{$index}}</td>
+							<td>{{$element}}</td>
+						</tr>
+					{{end}}
+				{{ end }}
+			{{end}}
+		{{end}}
+	</table>
+</div>
+{{end}}
+
+{{define "sidebar"}}
+home sidebar
+{{end}}
+
+{{define "footer"}}
+	<pre class="log"></pre>
+{{end}}
+
+{{define "javascript"}}
+	<!-- script src="http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js"></script -->
+	<script src="{{.STATIC_URL}}js/jquery.json.min.js"></script>
+	<!-- script src="http://jquery-websocket.googlecode.com/files/jquery.websocket-0.0.1.js"></script -->
+	<script src="{{.STATIC_URL}}js/jquery.WebSocket.js.min.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.log.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var log = new $.log($(".log"));
+			log.Start();
+		});
+	</script>
+{{end}}

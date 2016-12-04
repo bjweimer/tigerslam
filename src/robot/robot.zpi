@@ -1,0 +1,238 @@
+<!-- Project file for the Zeus IDE - http://www.zeusedit.com -->
+<Project name="Robot" sorted="Yes" autosynch="" type="" filename="" st_mtime="">
+    <SccEnable>On</SccEnable>
+    <SccUserID></SccUserID>
+    <SccComment></SccComment>
+    <SccProject></SccProject>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+    <TagEnable>On</TagEnable>
+    <TagNone>Off</TagNone>
+    <TagBuildNone>Off</TagBuildNone>
+    <TagBuildOnOpen>On</TagBuildOnOpen>
+    <TagBuildOnSave>On</TagBuildOnSave>
+    <TagNoIntellisense>Off</TagNoIntellisense>
+    <TagWorkspace>On</TagWorkspace>
+    <TagOutputDir>$zudzTags</TagOutputDir>
+    <TagInterval>20</TagInterval>
+    <TagBuildTimed></TagBuildTimed>
+    <Tags />
+    <Server></Server>
+    <UserID></UserID>
+    <Password></Password>
+    <LocalDir></LocalDir>
+    <RemoteDir></RemoteDir>
+    <Classes>Classes</Classes>
+    <Enumerations>Enumerations</Enumerations>
+    <Files>Project Files</Files>
+    <Functions>Functions</Functions>
+    <Imports>Imports</Imports>
+    <Interfaces>Interfaces</Interfaces>
+    <Macros>Macros</Macros>
+    <Packages>Packages</Packages>
+    <Prototypes>Prototypes</Prototypes>
+    <References>References</References>
+    <Structures>Structures</Structures>
+    <Typedefs>Typedefs</Typedefs>
+    <Variables>Variables</Variables>
+    <MakeFile></MakeFile>
+    <SearchPath></SearchPath>
+    <RegexFile></RegexFile>
+    <RegexLine></RegexLine>
+    <RegexInfo></RegexInfo>
+    <RegexError></RegexError>
+    <RegexWarning></RegexWarning>
+    <EnvLib></EnvLib>
+    <EnvPath></EnvPath>
+    <EnvInclude></EnvInclude>
+    <EnvClassPath></EnvClassPath>
+    <DoxygenAsJava>On</DoxygenAsJava>
+    <DebugCaptureStdOut>Off</DebugCaptureStdOut>
+    <DebugCaptureStdErr>Off</DebugCaptureStdErr>
+    <DebugExecutable>$pb.exe</DebugExecutable>
+    <DebugArguments></DebugArguments>
+    <DebugDirectory>$pdd</DebugDirectory>
+    <DebugDebugger></DebugDebugger>
+    <ReleaseCaptureStdOut>Off</ReleaseCaptureStdOut>
+    <ReleaseCaptureStdErr>Off</ReleaseCaptureStdErr>
+    <ReleaseExecutable>$pb.exe</ReleaseExecutable>
+    <ReleaseArguments></ReleaseArguments>
+    <ReleaseDirectory>$pdd</ReleaseDirectory>
+    <ReleaseDebugger></ReleaseDebugger>
+    <DebugMake></DebugMake>
+    <DebugClean></DebugClean>
+    <DebugCompile></DebugCompile>
+    <DebugRebuild></DebugRebuild>
+    <DebugProjectOutput>Always</DebugProjectOutput>
+    <DebugCompilerOutput>Always</DebugCompilerOutput>
+    <DebugCompilerStdOut>On</DebugCompilerStdOut>
+    <DebugCompilerStdErr>On</DebugCompilerStdErr>
+    <DebugCompilerSaveAll>Off</DebugCompilerSaveAll>
+    <DebugCompilerReload>Off</DebugCompilerReload>
+    <DebugProjectStdOut>On</DebugProjectStdOut>
+    <DebugProjectStdErr>On</DebugProjectStdErr>
+    <DebugProjectSaveAll>Off</DebugProjectSaveAll>
+    <DebugProjectReload>Off</DebugProjectReload>
+    <DebugClangUsePCH>On</DebugClangUsePCH>
+    <DebugClangExtension>.zpch</DebugClangExtension>
+    <ReleaseMake></ReleaseMake>
+    <ReleaseClean></ReleaseClean>
+    <ReleaseCompile></ReleaseCompile>
+    <ReleaseRebuild></ReleaseRebuild>
+    <ReleaseProjectOutput>Always</ReleaseProjectOutput>
+    <ReleaseCompilerOutput>Always</ReleaseCompilerOutput>
+    <ReleaseCompilerStdOut>On</ReleaseCompilerStdOut>
+    <ReleaseCompilerStdErr>On</ReleaseCompilerStdErr>
+    <ReleaseCompilerSaveAll>Off</ReleaseCompilerSaveAll>
+    <ReleaseCompilerReload>Off</ReleaseCompilerReload>
+    <ReleaseProjectStdOut>On</ReleaseProjectStdOut>
+    <ReleaseProjectStdErr>On</ReleaseProjectStdErr>
+    <ReleaseProjectSaveAll>Off</ReleaseProjectSaveAll>
+    <ReleaseProjectReload>Off</ReleaseProjectReload>
+    <ReleaseClangUsePCH>On</ReleaseClangUsePCH>
+    <ReleaseClangExtension>.zpch</ReleaseClangExtension>
+    <File>main.go</File>
+    <Folder name="collisionavoidance" sorted="Yes">
+        <File>collisionavoidance\collisionavoidance.go</File>
+        <File>collisionavoidance\collisionavoidance_test.go</File>
+    </Folder>
+    <Folder name="config" sorted="Yes">
+        <File>config\config.go</File>
+        <File>config\config_test.go</File>
+    </Folder>
+    <Folder name="controller" sorted="Yes">
+        <File>controller\controller.go</File>
+    </Folder>
+    <Folder name="drivebywire" sorted="Yes">
+        <File>drivebywire\drivebywire.go</File>
+        <File>drivebywire\drivebywire_test.go</File>
+    </Folder>
+    <Folder name="fsm" sorted="Yes">
+        <File>fsm\fsm.go</File>
+    </Folder>
+    <Folder name="logging" sorted="Yes">
+        <File>logging\log.go</File>
+        <Folder name="datalog" sorted="Yes">
+            <File>logging\datalog\datalog.go</File>
+        </Folder>
+    </Folder>
+    <Folder name="mapstorage" sorted="Yes">
+        <File>mapstorage\mapdata.go</File>
+        <File>mapstorage\mapstorage.go</File>
+        <File>mapstorage\mapstorage_test.go</File>
+    </Folder>
+    <Folder name="model" sorted="Yes">
+        <File>model\model.go</File>
+        <File>model\model_test.go</File>
+    </Folder>
+    <Folder name="motor" sorted="Yes">
+        <File>motor\motor.go</File>
+        <Folder name="driver" sorted="Yes">
+            <File>motor\driver\driver.go</File>
+            <File>motor\driver\driver_test.go</File>
+        </Folder>
+        <Folder name="dummydriver" sorted="Yes">
+            <File>motor\dummydriver\dummydriver.go</File>
+        </Folder>
+        <Folder name="peasing" sorted="Yes">
+            <File>motor\peasing\easing.go</File>
+        </Folder>
+    </Folder>
+    <Folder name="pathfollowing" sorted="Yes">
+        <File>pathfollowing\pathfollowing.go</File>
+        <Folder name="lookahead" sorted="Yes">
+            <File>pathfollowing\lookahead\lookahead.go</File>
+            <File>pathfollowing\lookahead\lookahead_test.go</File>
+        </Folder>
+        <Folder name="los" sorted="Yes">
+            <File>pathfollowing\los\los.go</File>
+            <File>pathfollowing\los\los_test.go</File>
+        </Folder>
+    </Folder>
+    <Folder name="pathplanning" sorted="Yes">
+        <File>pathplanning\pathplanning.go</File>
+        <Folder name="astar" sorted="Yes">
+            <File>pathplanning\astar\astar.go</File>
+            <File>pathplanning\astar\astar_test.go</File>
+            <File>pathplanning\astar\node.go</File>
+        </Folder>
+        <Folder name="binarymap" sorted="Yes">
+            <File>pathplanning\binarymap\binarycell.go</File>
+            <File>pathplanning\binarymap\binarymap.go</File>
+            <File>pathplanning\binarymap\binarymap_test.go</File>
+            <File>pathplanning\binarymap\gridMapBinaryFunctions.go</File>
+        </Folder>
+        <Folder name="hybridastar" sorted="Yes">
+            <File>pathplanning\hybridastar\hybridastar.go</File>
+            <File>pathplanning\hybridastar\hybridastar_test.go</File>
+            <File>pathplanning\hybridastar\node.go</File>
+            <File>pathplanning\hybridastar\node_test.go</File>
+        </Folder>
+        <Folder name="path" sorted="Yes">
+            <File>pathplanning\path\path.go</File>
+        </Folder>
+    </Folder>
+    <Folder name="sensors" sorted="Yes">
+        <File>sensors\sensors.go</File>
+        <Folder name="lidar" sorted="Yes">
+            <File>sensors\lidar\lidar.go</File>
+            <File>sensors\lidar\lidar_test.go</File>
+            <File>sensors\lidar\lidarreading.go</File>
+            <Folder name="driver" sorted="Yes">
+                <File>sensors\lidar\driver\driver.go</File>
+                <File>sensors\lidar\driver\driver_test.go</File>
+            </Folder>
+        </Folder>
+        <Folder name="logging" sorted="Yes">
+            <File>sensors\logging\logging.go</File>
+            <File>sensors\logging\logging_test.go</File>
+        </Folder>
+        <Folder name="logreader" sorted="Yes">
+            <File>sensors\logreader\logreader.go</File>
+            <File>sensors\logreader\logreader_test.go</File>
+        </Folder>
+        <Folder name="odometry" sorted="Yes">
+            <File>sensors\odometry\odometry.go</File>
+            <File>sensors\odometry\odometry_test.go</File>
+            <File>sensors\odometry\odometryreading.go</File>
+        </Folder>
+        <Folder name="sensor" sorted="Yes">
+            <File>sensors\sensor\reading.go</File>
+            <File>sensors\sensor\sensor.go</File>
+        </Folder>
+    </Folder>
+    <Folder name="slam" sorted="Yes">
+        <File>slam\slam.go</File>
+        <Folder name="hector" sorted="Yes">
+            <File>slam\hector\ekf.go</File>
+            <File>slam\hector\hector.go</File>
+        </Folder>
+        <Folder name="tinyslam" sorted="Yes">
+            <File>slam\tinyslam\tinyslam.go</File>
+            <File>slam\tinyslam\tinyslam_test.go</File>
+            <Folder name="gridmap" sorted="Yes">
+                <File>slam\tinyslam\gridmap\cell.go</File>
+                <File>slam\tinyslam\gridmap\gridmap.go</File>
+                <File>slam\tinyslam\gridmap\gridmap_test.go</File>
+            </Folder>
+            <Folder name="holemap" sorted="Yes">
+                <File>slam\tinyslam\holemap\holemap.go</File>
+                <File>slam\tinyslam\holemap\holemapcell.go</File>
+                <File>slam\tinyslam\holemap\holemapfunctions.go</File>
+            </Folder>
+        </Folder>
+    </Folder>
+    <Folder name="tools" sorted="Yes">
+        <Folder name="intmath" sorted="Yes">
+            <File>tools\intmath\intmath.go</File>
+        </Folder>
+    </Folder>
+    <Folder name="web" sorted="Yes">
+        <File>web\api.go</File>
+        <File>web\download.go</File>
+        <File>web\log.go</File>
+        <File>web\pages.go</File>
+        <File>web\streaming.go</File>
+        <File>web\webserver.go</File>
+    </Folder>
+</Project>

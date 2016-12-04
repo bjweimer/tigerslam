@@ -1,0 +1,57 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "github.com/abbot/go-http-auth",
+			"repository": "https://github.com/abbot/go-http-auth",
+			"revision": "cb4372376e1e00e9f6ab9ec142e029302c9e7140",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/skelterjohn/go.matrix",
+			"repository": "https://github.com/skelterjohn/go.matrix",
+			"revision": "daa59528eefd43623a4c8e36373a86f9eef870a2",
+			"branch": "go1"
+		},
+		{
+			"importpath": "github.com/tarm/goserial",
+			"repository": "https://github.com/tarm/goserial",
+			"revision": "b3440c3c63556c3fd67e915be3b92195bc70294a",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/tarm/serial",
+			"repository": "https://github.com/tarm/serial",
+			"revision": "37be519d49878d0098e34fb614136b81e6c87861",
+			"branch": "master"
+		},
+		{
+			"importpath": "golang.org/x/crypto/bcrypt",
+			"repository": "https://go.googlesource.com/crypto",
+			"revision": "9477e0b78b9ac3d0b03822fd95422e2fe07627cd",
+			"branch": "master",
+			"path": "/bcrypt"
+		},
+		{
+			"importpath": "golang.org/x/crypto/blowfish",
+			"repository": "https://go.googlesource.com/crypto",
+			"revision": "9477e0b78b9ac3d0b03822fd95422e2fe07627cd",
+			"branch": "master",
+			"path": "/blowfish"
+		},
+		{
+			"importpath": "golang.org/x/net/context",
+			"repository": "https://go.googlesource.com/net",
+			"revision": "0e2717dc3cc05907dc23096ef3a9086ea93f567f",
+			"branch": "master",
+			"path": "/context"
+		},
+		{
+			"importpath": "golang.org/x/net/websocket",
+			"repository": "https://go.googlesource.com/net",
+			"revision": "0e2717dc3cc05907dc23096ef3a9086ea93f567f",
+			"branch": "master",
+			"path": "/websocket"
+		}
+	]
+}

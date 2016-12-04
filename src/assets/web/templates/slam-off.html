@@ -1,0 +1,192 @@
+{{define "content"}}
+	<h2>Create new map</h2>
+
+	<div class="btn-group">
+		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			Create New Map
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<li><a href="#" data-role="start-new-map" data-algorithm="hectorslam">Using Hector SLAM</a></li>
+			<li><a href="#" data-role="start-new-map" data-algorithm="tinyslam">Using TinySLAM</a></li>
+		<ul>
+	</div>
+
+	<!-- <a href="#initializeHectorModal" role="button" class="btn" data-toggle="modal">Initialize HectorSLAM</a> -->
+
+	<h2>Use stored map</h2>
+
+	<div class="row-fluid">
+		<ul class="thumbnails">
+			{{range $filename, $meta := .DATA.MAP_STORAGE}}
+			<li class="span3">
+				<div class="thumbnail">
+					<a href="#" data-role="open-details" data-filename="{{$filename}}">
+						<img src="/api/get/mapstorage/thumbnail?filename={{$filename}}">
+					</a>
+					<div class="caption">
+						<h4>{{$meta.Name}}</h4>
+						<p><small>{{$meta.Description}}</small></p>
+						<p><small class="muted">{{$meta.Mdp.GetSizeX}} &times; {{$meta.Mdp.GetSizeY}} cells, {{$meta.Mdp.GetCellLength}}<sup>2</sup> meter</small></p>
+						<p>
+							<button class="btn" data-role="open-details" data-filename="{{$filename}}"><i class="icon-eye-open"></i> More ...</button>
+						</p>
+					</div>
+				</div>
+			</li>
+			{{end}}
+		</ul>
+	</div>
+
+<div id="map-details-modal" class="modal large hide fade" role="dialog" aria-labelledby="Map details" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    	<h3><span data-role="map-name"></span> details</h3>
+	</div>
+	<div class="modal-body row-fluid">
+		<div class="span3">
+			<img src="" class="img-rounded" alt="Map thumbnail" data-role="thumbnail">
+		</div>
+		
+		<div class="span9">
+			<ul class="nav nav-tabs" id="details-tab">
+				<li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+				<li><a href="#edit" data-toggle="tab">Edit</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="info">
+					<p data-role="description"></p>
+					<dl class="muted">
+						<dt>Resolution</dt>
+							<dd><span data-role="size-x"></span> &times; <span data-role="size-y"></span></dd>
+						<dt>Physical size</dt>
+							<dd><span data-role="length-x"></span> &times; <span data-role="length-y"></span></dd>
+						<dt>Cell area</dt>
+							<dd><span data-role="cell-area"></span></dd>
+					</dl>
+				</div>
+
+				<div class="tab-pane" id="edit">
+					<form>
+
+						<form class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label" for="map-name">Name</label>
+								<div class="controls">
+									<input type="text" id="map-name" placeholder="Name">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="map-description">Description</label>
+								<div class="controls">
+									<textarea id="map-description" data-role="description"></textarea>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label"></label>
+								<div class="controls">
+									<button class="btn" data-role="save-map-metadata">Save</button>
+								</div>
+							</div>
+						</form>
+
+						<button class="btn" data-role="copy-map">Copy <span data-role="map-name"></span></button>
+						<button class="btn btn-danger" data-role="save-map">Delete <span data-role="map-name"></span></button>
+					</form>
+				</div>
+			</div>
+
+			
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary pull-left" data-role="open-stored-map" data-filename=""><i class="icon-ok icon-white"></i> Open</button>
+	</div>
+</div>
+
+<div id="initializeHectorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Initialize HectorSLAM" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="initializeHectorModalLabel">Initialize HectorSLAM</h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="gridmap-size-x">Grid map width</label>
+				<div class="controls">
+					<input type="range" min="512" max="4096" step="512" value="2048">
+					<input type="number" id="gridmap-size-x" placeholder="Width (pixels)" value="2048">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="gridmap-size-x">Grid map height</label>
+				<div class="controls">
+					<input type="number" id="gridmap-size-y" placeholder="Height (pixels)" value="2048">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="gridmap-resolution">Resolution</label>
+				<div class="controls">
+					<select id="gridmap-resolution">
+						<option value="0.0125">0.0125</option>
+						<option value="0.025">0.025</option>
+						<option value="0.05">0.05</option>
+						<option value="0.1">0.1</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="gridmap-start-x" for="">Start position X</label>
+				
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary">Initialize HectorSLAM</button>
+	</div>
+</div>
+
+
+<div class="modal hide fade" id="progress-modal">
+	<div class="modal-header">
+		<h3>Opening map &hellip;</h3>
+	</div>
+	<div class="modal-body">
+		<div class="progress progress-striped active">
+			<div class="bar" style="width: 0%;"></div>
+		</div>
+	</div>
+</div>
+
+{{end}}
+
+{{define "sidebar"}}
+
+{{end}}
+
+{{define "footer"}}
+	<pre class="log"></pre>
+{{end}}
+
+{{define "javascript"}}
+	<!-- script src="http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js"></script -->
+	<script src="{{.STATIC_URL}}js/jquery.json.min.js"></script>
+	<!--script src="http://jquery-websocket.googlecode.com/files/jquery.websocket-0.0.1.js"></script -->
+	<script src="{{.STATIC_URL}}js/jquery.WebSocket.js.min.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.log.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.progressmodal.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.mapmanager.js"></script>
+	<script src="{{.STATIC_URL}}js/common.js"></script>
+	<script type="text/javascript">
+		var mapManager;
+		$(document).ready(function() {
+			var log = new $.log($(".log"), {'rate': {{.DATA.LOG_UPDATE_RATE}} } );
+			log.Start();
+
+			mapManager = new $.mapmanager();
+		});
+	</script>
+{{end}}

@@ -1,0 +1,30 @@
+{{define "content"}}
+<div id="manual-control">
+	<div id="joystick"></div>
+	<div id="trackpad">
+	
+	</div>
+</div>
+{{end}}
+
+{{define "sidebar"}}
+	
+{{end}}
+
+{{define "footer"}}
+	<a class="status span12 disabled btn btn-default">Not determined</a>
+{{end}}
+
+{{define "javascript"}}
+	<script src="{{.STATIC_URL}}js/common.js"></script>
+	<script src="{{.STATIC_URL}}js/raphael.js"></script>
+	<script src="{{.STATIC_URL}}js/joystick.jquery.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.manualcontrol.js"></script>
+	<script type="text/javascript">
+		var manualcontrol;
+
+		$(document).ready(function() {
+			manualcontrol = new $.manualcontrol($("#manual-control"), {});
+		});
+	</script>
+{{end}}

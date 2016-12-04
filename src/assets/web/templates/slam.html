@@ -1,0 +1,215 @@
+{{define "content"}}
+<div class="row-fluid">
+	<div id="map_canvas" class="span9"></div>
+
+	<div class="span3">
+
+		<h4>{{.DATA.CONTROLLER.SlamController.GetSlam.GetTypeName}}</h4>
+
+		<button class="btn btn-primary" data-role="start-slam" style="display: none;">Start</button>
+		<button class="btn" data-role="stop-slam" style="display: none;">Stop</button>
+		<button class="btn" data-role="close-slam" style="display: none;">Close</button>
+
+		<hr>
+
+		<ul class="nav nav-tabs" id="slam-tabs">
+			<li class="active"><a href="#control" data-toggle="tab">Control</a></li>
+			<li><a href="#navigation" data-toggle="tab">Navigation</a></li>
+			<li><a href="#map" data-toggle="tab">Map</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane active" id="control">
+				<ul class="nav nav-list">
+					<li class="nav-header">Show</li>
+					<li>
+						<label class="checkbox">
+							<input type="checkbox" id="robot-toggler" checked="checked"> Robot icon
+						</label>
+					</li>
+					<li>
+						<label class="checkbox">
+							<input type="checkbox" id="trace-toggler" checked="checked"> Position trace
+						</label>
+					</li>
+					<li class="nav-header">Behaviour</li>
+					<li>
+						<label class="checkbox">
+							<input type="checkbox" id="follow-toggler"> Follow robot
+						</label>
+					</li>
+				</ul>
+
+			</div>
+			<div class="tab-pane" id="navigation">
+				<button class="btn btn-block">Go home</button>
+			</div>
+			<div class="tab-pane" id="map">
+
+				<form>
+					<fieldset>
+						<label>Map name</label>
+						<input type="text" placeholder="Unnamed map">
+						<label>Map description</label>
+						<input type="text" placeholder="E.g. where or when">
+						<br>
+						<button type="submit" class="btn">Save</button>
+					</fieldset>
+				</form>
+
+				<hr>
+
+				<a href="/api/get/slam/image/full" download="map.png"><i class="icon-picture"></i> Download full map image</a>
+			</div>
+		</div>
+
+<pre class="span3 slam-pos">
+x: <span data-role="position-x"></span> m, y: <span data-role="position-y"></span> m, &theta;: <span data-role="position-theta"></span>&deg;
+</pre>
+
+	</div>
+
+	<ul id="context_menu" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+		<li><a href="#" role="go-here"><i class="icon-road"></i> Go here</a></li>
+		<li><a href="#" role="update-map"><i class="icon-refresh"></i> Update map</a></li>
+		<li><a href="#" role="center"><i class="icon-move"></i> Center</a></li>
+		<li class="divider"></li>
+		<li><a href="#" role="zoom-in"><i class="icon-zoom-in"></i> Zoom in</a></li>
+		<li><a href="#" role="zoom-out"><i class="icon-zoom-out"></i> Zoom out</a></li>
+		<li class="divider"></li>
+		<li><a href="#" role="insert-ruler-point"><i class="icon-pencil"></i> Add ruler point</a></li>
+		<li><a href="#" role="reset-ruler"><i class="icon-trash"></i> Reset ruler</a></li>
+		<li class="divider"></li>
+		<li class="disabled">
+			<a role="coordinates">x: 0, y: 0</a>
+		</li>
+	</ul>
+
+	<div class="modal hide fade" id="pathplanning-modal">
+		<div class="modal-header">
+			<h3>Planning path &hellip;</h3>
+		</div>
+		<div class="modal-body">
+			<div class="progress progress-striped active">
+				<div class="bar" style="width: 0%;"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal hide fade" id="progress-modal">
+		<div class="modal-header">
+			<h3>Opening map &hellip;</h3>
+		</div>
+		<div class="modal-body">
+			<div class="progress progress-striped active">
+				<div class="bar" style="width: 0%;"></div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal hide fade" id="close-modal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>Save before closing?</h3>
+		</div>
+		<div class="modal-body">
+
+			<form class="form-horizontal">
+
+				<div class="control-group">
+					<label class="control-label" for="map-name">Name</label>
+					<div class="controls">
+						<input type="text" id="map-name" placeholder="E.g. Sector A-27">
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="map-description">Description</label>
+					<div class="controls">
+						<textarea id="map-description" rows="5" placeholder="E.g. Normal state of building"></textarea>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn pull-left" data-loading-text="Closing ..." data-role="close-without-saving">Close without saving</a>
+			<a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+			<a href="#" class="btn btn-primary" data-role="save-and-close">Save map</a>
+		</div>
+	</div>
+	
+</div>
+{{end}}
+
+{{define "footer"}}
+	<pre class="log"></pre>
+{{end}}
+
+{{define "javascript"}}
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script src="{{.STATIC_URL}}js/googlemaps.slammap.js"></script>
+	<!-- script src="http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js"></script -->
+	<script src="{{.STATIC_URL}}js/jquery.json.min.js"></script>
+	<!-- script src="http://jquery-websocket.googlecode.com/files/jquery.websocket-0.0.1.js"></script -->
+	<script src="{{.STATIC_URL}}js/jquery.WebSocket.js.min.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.log.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.progressmodal.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.slamstats.js"></script>
+	<script src="{{.STATIC_URL}}js/common.js"></script>
+	<script type="text/javascript">
+		var map;
+		var slamstats;
+	
+		$(document).ready(function() {
+			var log = new $.log($(".log"), {'rate': {{.DATA.LOG_UPDATE_RATE}} } );
+			log.Start();
+			
+			map = createSlamMap({{.DATA.CONTROLLER.SlamController.GetSlam.GetMapSizeMeters}});
+			
+			// Wait until map is fully loaded
+			google.maps.event.addListenerOnce(map, 'idle', function() {
+				slamstats = new $.slamstats(map, {
+					pullRate: 1000,
+					mapUpdateDistanceDiff: 5.0,
+					mapOffset: {
+						X: {{.DATA.CONTROLLER.SlamController.GetSlam.GetOffsetX}}, 
+						Y: {{.DATA.CONTROLLER.SlamController.GetSlam.GetOffsetY}}
+					},
+					trace: {
+						toggler: $("#trace-toggler"),
+						line: {
+							strokeColor: '#f00',
+							strokeOpacity: 1.0,
+							strokeWeight: 1,
+						},
+					},
+					robot: {
+						toggler: $("#robot-toggler"),
+						physical: [
+							[
+								{X: -0.5, Y: -0.25}, {X: 0.5, Y: -0.25},
+								{X: 0.5, Y: 0.25}, {X: -0.5, Y: 0.25}
+							],
+							[
+								{X: 0.25, Y: -0.25}, {X: 0.5, Y: 0}, {X: 0.25, Y: 0.25}
+							]
+						],
+						fillColor: "#0000FF",
+						fillOpacity: 0.10,
+						strokeColor: "#0000FF",
+						strokeOpacity: 0.8,
+						strokeWeight: 0.2,
+					},
+					follow: {
+						toggler: $("#follow-toggler"),
+					}
+				});
+				slamstats.Start();
+			})
+			
+		});
+	</script>
+{{end}}

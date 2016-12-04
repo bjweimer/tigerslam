@@ -1,0 +1,6 @@
+bin
+pkg
+*.log
+*.ztow
+*.tigermap
+src/assets/datasets

@@ -1,0 +1,142 @@
+<!-- Project file for the Zeus IDE - http://www.zeusedit.com -->
+<Project name="Hectormapping" sorted="Yes" autosynch="" type="" filename="" st_mtime="">
+    <SccEnable>On</SccEnable>
+    <SccUserID></SccUserID>
+    <SccComment></SccComment>
+    <SccProject></SccProject>
+    <SccAuxPath></SccAuxPath>
+    <SccLocalPath></SccLocalPath>
+    <TagEnable>On</TagEnable>
+    <TagNone>Off</TagNone>
+    <TagBuildNone>Off</TagBuildNone>
+    <TagBuildOnOpen>On</TagBuildOnOpen>
+    <TagBuildOnSave>On</TagBuildOnSave>
+    <TagNoIntellisense>Off</TagNoIntellisense>
+    <TagWorkspace>On</TagWorkspace>
+    <TagOutputDir>$zudzTags</TagOutputDir>
+    <TagInterval>20</TagInterval>
+    <TagBuildTimed></TagBuildTimed>
+    <Tags />
+    <Server></Server>
+    <UserID></UserID>
+    <Password></Password>
+    <LocalDir></LocalDir>
+    <RemoteDir></RemoteDir>
+    <Classes>Classes</Classes>
+    <Enumerations>Enumerations</Enumerations>
+    <Files>Project Files</Files>
+    <Functions>Functions</Functions>
+    <Imports>Imports</Imports>
+    <Interfaces>Interfaces</Interfaces>
+    <Macros>Macros</Macros>
+    <Packages>Packages</Packages>
+    <Prototypes>Prototypes</Prototypes>
+    <References>References</References>
+    <Structures>Structures</Structures>
+    <Typedefs>Typedefs</Typedefs>
+    <Variables>Variables</Variables>
+    <MakeFile></MakeFile>
+    <SearchPath></SearchPath>
+    <RegexFile></RegexFile>
+    <RegexLine></RegexLine>
+    <RegexInfo></RegexInfo>
+    <RegexError></RegexError>
+    <RegexWarning></RegexWarning>
+    <EnvLib></EnvLib>
+    <EnvPath></EnvPath>
+    <EnvInclude></EnvInclude>
+    <EnvClassPath></EnvClassPath>
+    <DoxygenAsJava>On</DoxygenAsJava>
+    <DebugCaptureStdOut>Off</DebugCaptureStdOut>
+    <DebugCaptureStdErr>Off</DebugCaptureStdErr>
+    <DebugExecutable>$pb.exe</DebugExecutable>
+    <DebugArguments></DebugArguments>
+    <DebugDirectory>$pdd</DebugDirectory>
+    <DebugDebugger></DebugDebugger>
+    <ReleaseCaptureStdOut>Off</ReleaseCaptureStdOut>
+    <ReleaseCaptureStdErr>Off</ReleaseCaptureStdErr>
+    <ReleaseExecutable>$pb.exe</ReleaseExecutable>
+    <ReleaseArguments></ReleaseArguments>
+    <ReleaseDirectory>$pdd</ReleaseDirectory>
+    <ReleaseDebugger></ReleaseDebugger>
+    <DebugMake></DebugMake>
+    <DebugClean></DebugClean>
+    <DebugCompile></DebugCompile>
+    <DebugRebuild></DebugRebuild>
+    <DebugProjectOutput>Always</DebugProjectOutput>
+    <DebugCompilerOutput>Always</DebugCompilerOutput>
+    <DebugCompilerStdOut>On</DebugCompilerStdOut>
+    <DebugCompilerStdErr>On</DebugCompilerStdErr>
+    <DebugCompilerSaveAll>Off</DebugCompilerSaveAll>
+    <DebugCompilerReload>Off</DebugCompilerReload>
+    <DebugProjectStdOut>On</DebugProjectStdOut>
+    <DebugProjectStdErr>On</DebugProjectStdErr>
+    <DebugProjectSaveAll>Off</DebugProjectSaveAll>
+    <DebugProjectReload>Off</DebugProjectReload>
+    <DebugClangUsePCH>On</DebugClangUsePCH>
+    <DebugClangExtension>.zpch</DebugClangExtension>
+    <ReleaseMake></ReleaseMake>
+    <ReleaseClean></ReleaseClean>
+    <ReleaseCompile></ReleaseCompile>
+    <ReleaseRebuild></ReleaseRebuild>
+    <ReleaseProjectOutput>Always</ReleaseProjectOutput>
+    <ReleaseCompilerOutput>Always</ReleaseCompilerOutput>
+    <ReleaseCompilerStdOut>On</ReleaseCompilerStdOut>
+    <ReleaseCompilerStdErr>On</ReleaseCompilerStdErr>
+    <ReleaseCompilerSaveAll>Off</ReleaseCompilerSaveAll>
+    <ReleaseCompilerReload>Off</ReleaseCompilerReload>
+    <ReleaseProjectStdOut>On</ReleaseProjectStdOut>
+    <ReleaseProjectStdErr>On</ReleaseProjectStdErr>
+    <ReleaseProjectSaveAll>Off</ReleaseProjectSaveAll>
+    <ReleaseProjectReload>Off</ReleaseProjectReload>
+    <ReleaseClangUsePCH>On</ReleaseClangUsePCH>
+    <ReleaseClangExtension>.zpch</ReleaseClangExtension>
+    <File>hectormapping.go</File>
+    <File>hectormapping_test.go</File>
+    <File>hectorSlamProcessor.go</File>
+    <Folder name="datacontainer" sorted="Yes">
+        <File>datacontainer\dataContainer.go</File>
+    </Folder>
+    <Folder name="map" sorted="Yes">
+        <Folder name="cache" sorted="Yes">
+            <File>map\cache\cacheMethod.go</File>
+            <File>map\cache\gridMapCacheArray.go</File>
+        </Folder>
+        <Folder name="gridmap" sorted="Yes">
+            <File>map\gridmap\gridMap.go</File>
+            <File>map\gridmap\occGridMap.go</File>
+            <Folder name="base" sorted="Yes">
+                <File>map\gridmap\base\gridMapBase.go</File>
+            </Folder>
+            <Folder name="logoddsmap" sorted="Yes">
+                <File>map\gridmap\logoddsmap\gridMapLogOddsFunctions.go</File>
+                <File>map\gridmap\logoddsmap\logOddsCell.go</File>
+                <File>map\gridmap\logoddsmap\occGridMapLogOdds.go</File>
+            </Folder>
+            <Folder name="mapdimensionproperties" sorted="Yes">
+                <File>map\gridmap\mapdimensionproperties\mapDimensionProperties.go</File>
+            </Folder>
+            <Folder name="occbase" sorted="Yes">
+                <File>map\gridmap\occbase\occGridMapBase.go</File>
+                <File>map\gridmap\occbase\occGridMapUtil.go</File>
+            </Folder>
+        </Folder>
+        <Folder name="mapimages" sorted="Yes">
+            <File>map\mapimages\gridmapimagemaker.go</File>
+        </Folder>
+        <Folder name="mapproccontainer" sorted="Yes">
+            <File>map\mapproccontainer\mapProcContainer.go</File>
+        </Folder>
+        <Folder name="maprep" sorted="Yes">
+            <File>map\maprep\mapRepMultiMap.go</File>
+            <File>map\maprep\mapRepresentationInterface.go</File>
+            <File>map\maprep\mapRepSingleMap.go</File>
+        </Folder>
+    </Folder>
+    <Folder name="scanmatcher" sorted="Yes">
+        <File>scanmatcher\scanMatcher.go</File>
+    </Folder>
+    <Folder name="utils" sorted="Yes">
+        <File>utils\utils.go</File>
+    </Folder>
+</Project>

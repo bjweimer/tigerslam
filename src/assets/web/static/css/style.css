@@ -1,0 +1,119 @@
+html, body, .container, .content, .container-fluid {
+    height: 100%;
+}
+ 
+.container, .content, .container-fluid {
+    position: relative;
+}
+ 
+.proper-content {
+    padding-top: 60px; /* >= navbar height */
+}
+ 
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -150px; /* same as the footer */
+    padding-bottom: 150px;
+}
+ 
+.push {
+    height: 150px; /* same as the footer */
+}
+
+.footer-wrapper {
+    position: relative;
+    height: 150px;
+}
+
+.log {
+	height: 110px;
+	overflow: auto;
+}
+
+#joystick {
+	position: absolute;
+}
+
+#trackpad {
+	height: 300px;
+	width: 300px;
+	background-color: #fafafa;
+	border: 1px solid #999;
+}
+
+/* Dashboard Modules
+---------------------------------------*/
+.module {
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+	        border-radius: 4px;
+}
+
+.module h4 {
+	background-color: #eee;
+	margin: 0;
+	padding: 10px;
+}
+
+.module hr {
+	margin-top: 0px;
+}
+
+/* Slam map
+---------------------------------------*/
+#map_canvas {
+	height: 750px;
+	border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
+
+#context_menu {
+	display: none;
+}
+	#context_menu ul {
+		list-style-type: none;
+	}
+
+.slam-pos {
+	position: absolute;
+	bottom: 160px;
+	margin-left: 0 !important;
+}
+
+/* Scrollbars */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #FFF;
+    -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb {
+    background: #CCC;
+    -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #AAA;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #888;
+    -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.modal.large{
+    width: 80%;
+    margin-left: -40%; /* - width/2 */
+}
+
+.thumbnail img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}

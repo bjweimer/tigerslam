@@ -1,0 +1,92 @@
+{{define "content"}}
+	
+	{{if equal .DATA.CONTROLLER.SensorController.GetStateString "SENSE"}}
+	
+		{{$anyConnected := .DATA.CONTROLLER.SensorController.AnySensorConnected}}
+		
+		<h2>Sensors</h2>
+		<table class="table">
+			<tr>
+				<th>Sensor name</th>
+				<th colspan="2">Status</th>
+			</tr>
+			{{range $sensor := .DATA.CONTROLLER.SensorController.Sensors}}
+			<tr>
+				<td>{{$sensor.GetTypeName}}</td>
+				<td>{{$sensor.GetState}}</td>
+				<td>
+					{{if equal $sensor.GetStateString "OFF"}}
+						<button class="btn btn-success" data-role="connect-sensor" data-sensor="{{$sensor.GetTypeName}}">Connect</button>
+					{{else}}
+						{{if equal $sensor.GetStateString "CONNECTED" }}
+							<button class="btn btn-danger" data-role="disconnect-sensor" data-sensor="{{$sensor.GetTypeName}}">Disconnect</button>
+							<button class="btn btn-success" data-role="start-sensor" data-sensor="{{$sensor.GetTypeName}}">Start</button>
+						{{else}}
+							<button class="btn btn-danger" data-role="stop-sensor" data-sensor="{{$sensor.GetTypeName}}">Stop</button>
+						{{end}}
+					{{end}}
+				</td>
+			</tr>
+			{{end}}
+			<!-- <tr>
+				<td colspan="3">
+					<button class="btn btn-success" data-role="connect-all-sensors">Connect all</button>
+					<button class="btn btn-danger" data-role="disconnect-all-sensors">Disconnect all</button>
+				</td>
+			</tr> -->
+		</table>
+		
+		<h2>Logs</h2>
+		<table class="table">
+		<tr>
+			<th>Log name</th>
+			<th>Size (KB)</th>
+			<th>Last modified</th>
+			<th>Download</th>
+			<th>Execute</th>
+			<th></th>
+		</tr>
+		{{with .DATA.LOGS}}
+			{{range .}}
+				<tr data-logname="{{.Name}}">
+					<td><span class="name">{{.Name}}</span> <a data-role="rename-sensorlog"><i class="icon-tag"></i></a></td>
+					<td>{{kilobyte .Size}}</td>
+					<td>{{smalldatetime .ModTime}}</td>
+					<td><a class="btn" href="/download/log/?file={{.Name}}"><i class="icon-download-alt"></i> Download</a></td>
+					<td><button class="btn {{if $anyConnected}}disabled{{end}}" data-role="start-logread-realtime"><i class="icon-play"></i> Run log in real time</button></td>
+					<td>
+						<a href="#" data-role="delete-sensorlog"><i class="icon-trash"></i></a>
+					</td>
+				</tr>
+			{{end}}
+		{{end}}
+		</table>
+	
+	{{ else }}
+		
+		<h2>Log currently running <em>{{ .DATA.CONTROLLER.SensorController.LogReader.GetFileName }}</em></h2>
+		<button class="btn btn-danger" data-role="stop-logread-realtime">Stop</button>
+	
+	{{ end }}
+{{end}}
+
+{{define "sidebar"}}
+
+{{end}}
+
+{{define "footer"}}
+	<pre class="log"></pre>
+{{end}}
+
+{{define "javascript"}}
+	<script src="{{.STATIC_URL}}js/common.js"></script>
+	<!-- script src="http://jquery-websocket.googlecode.com/files/jquery.websocket-0.0.1.js"></script -->
+	<script src="{{.STATIC_URL}}js/jquery.WebSocket.js.min.js"></script>
+	<script src="{{.STATIC_URL}}js/jquery.log.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var log = new $.log($(".log"));
+			log.Start();
+		});
+	</script>
+{{end}}
