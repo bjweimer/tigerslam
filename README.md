@@ -1,3 +1,4 @@
+
 # tigerslam
 
 TigerSLAM source code.
@@ -12,3 +13,5 @@ in your command line:
 ```bash
 gb build robot
 ```
+BJW is updating the initial repo code to match code currently in development but also
+successfully running on his robot at this point...

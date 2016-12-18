@@ -55,6 +55,7 @@ var API_FUNCMAP = map[string]func(http.ResponseWriter, *controller.Controller, u
 	"set/motor/followpath":        SetMotorFollowPath,
 	"set/motor/stoppathfollowing": SetMotorStopPathFollowing,
 	"set/motor/deletepath":        SetMotorDeletePath,
+	"set/motor/goto":              SetMotorGoTo,
 }
 
 func (ws *WebServer) getAPIAction(url string) string {
@@ -524,5 +525,34 @@ func SetMotorDeletePath(w http.ResponseWriter, ctrl *controller.Controller, data
 	ctrl.MotorController.DeletePath()
 
 	w.Header().Add("Content-Type", "application/json")
+	return json.Marshal("ok")
+}
+
+func SetMotorGoTo(w http.ResponseWriter, ctrl *controller.Controller, data url.Values) ([]byte, error) {
+	fmt.Println("SetMotorGoTo initiated!")
+
+	x, err := strconv.ParseFloat(data.Get("x"), 64)
+	if err != nil {
+		return nil, errors.New("Invalid X data")
+	}
+	fmt.Println("Target location X: ", x)
+
+	y, err := strconv.ParseFloat(data.Get("y"), 64)
+	if err != nil {
+		return nil, errors.New("Invalid Y data")
+	}
+	fmt.Println("Target location Y: ", y)
+
+	err = ctrl.PlanPath([3]float64{x, y, 0})
+	if err != nil {
+		return nil, errors.New("Path Planning failed!")
+	}
+
+	err = ctrl.FollowPath()
+	if err != nil {
+		return nil, errors.New("Path Following failed!")
+	}
+
+	w.Header().Add("Content-type", "application/json")
 	return json.Marshal("ok")
 }

@@ -103,7 +103,7 @@ func (mdp *MapDimensionProperties) GetCellLength() float64 {
 }
 
 // Gob encode
-func (mdp *MapDimensionProperties) GobEncode() ([]byte, error) {
+func (mdp MapDimensionProperties) GobEncode() ([]byte, error) {
 	w := new(bytes.Buffer)
 	encoder := gob.NewEncoder(w)
 
