@@ -116,7 +116,7 @@ func (m *Map) Save(filename string) error {
 
 	// Extract, save the map dimensions
 	m.Meta.Mdp = m.MapRep.GetGridMap(0).GetMapDimProperties()
-	fmt.Printf("\nLet's look at this: m.Meta.Mdp = %+v\n\n", m.Meta.Mdp)
+	// Debug: fmt.Printf("\nLet's look at this: m.Meta.Mdp = %+v\n\n", m.Meta.Mdp)
 
 	// ******************seems like the map should be instantiated here to be saved?????????????????????????????????????????
 	// Save the mapRep to archive
@@ -151,8 +151,8 @@ func (m *Map) saveMapRepToArchive(archive *zip.Writer) error {
 	// Create a gob encoder
 	encoder := gob.NewEncoder(mapfile)
 
-	fmt.Println("We got this far - try to print the m.MapRep")
-	fmt.Printf("m.MapRep = %+v\n\n", m.MapRep)
+	// Debug: fmt.Println("We got this far - try to print the m.MapRep")
+	//Debug: fmt.Printf("m.MapRep = %+v\n\n", m.MapRep)
 
 	//goon.Dump(m.MapRep)
 
@@ -160,8 +160,8 @@ func (m *Map) saveMapRepToArchive(archive *zip.Writer) error {
 	err = encoder.Encode(m.MapRep) // This is were the error occurs.
 	if err != nil {
 		fmt.Printf("An error occured in saveMapRepToArchive:\n%q\n", err) // This is the error!
-		fmt.Printf("This is the m.MapRep: \n %+v\n\n", m.MapRep)
-		fmt.Println("")
+		//fmt.Printf("This is the m.MapRep: \n %+v\n\n", m.MapRep)
+		//fmt.Println("")
 		//goon.Dump(m.MapRep.mapContainer)
 		return err // This returns an error, so the grid map doesn't get saved!
 	}
