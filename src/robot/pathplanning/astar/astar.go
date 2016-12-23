@@ -4,15 +4,23 @@ import (
 	"container/heap"
 	"errors"
 	"fmt"
+	"log"
 	"math"
 
 	"hectormapping/map/gridmap"
 
 	"robot/config"
+	"robot/logging"
 	"robot/model"
 	"robot/pathplanning/binarymap"
 	"robot/pathplanning/path"
 )
+
+var logger *log.Logger
+
+func init() {
+	logger = logging.New()
+}
 
 type AstarPlanner struct {
 
@@ -97,7 +105,7 @@ func (a *AstarPlanner) PlanPath(from, to [3]float64) (*path.Path, error) {
 
 		// Check if we have now reached the goal node
 		if current.mapIndex == a.goalIndex {
-			fmt.Printf("Successful, %d\n", i)
+			logger.Printf("Successfully planned an A* path to the goal after %d iterations!\n", i)
 			return a.reconstructPath(current), nil
 		}
 
@@ -147,7 +155,7 @@ func (a *AstarPlanner) setGoal(goal [3]float64) error {
 	a.goalIndex = a.getMapIndex(goal)
 	a.goalCellCoords = a.getCoords(a.goalIndex)
 
-	fmt.Printf("Goalcoords: %d, %d\n", a.goalCellCoords[0], a.goalCellCoords[1])
+	//Debug: This converts world coords to map coords: fmt.Printf("Goalcoords: %d, %d\n", a.goalCellCoords[0], a.goalCellCoords[1])
 
 	return nil
 }
