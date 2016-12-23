@@ -166,7 +166,7 @@ func setSlamSave(w http.ResponseWriter, ctrl *controller.Controller, data url.Va
 
 	// Get the MapRepresentation from the SlamController module, then save it
 	// with meta data.
-	fmt.Println("Enter setSlamSave function")
+	//Debug: fmt.Println("Enter setSlamSave function")
 
 	mapName := data.Get("name")
 	mapDescription := data.Get("description")
@@ -529,19 +529,19 @@ func SetMotorDeletePath(w http.ResponseWriter, ctrl *controller.Controller, data
 }
 
 func SetMotorGoTo(w http.ResponseWriter, ctrl *controller.Controller, data url.Values) ([]byte, error) {
-	fmt.Println("SetMotorGoTo initiated!")
+	logger.Println("SetMotorGoTo initiated!")
 
 	x, err := strconv.ParseFloat(data.Get("x"), 64)
 	if err != nil {
 		return nil, errors.New("Invalid X data")
 	}
-	fmt.Println("Target location X: ", x)
+	logger.Printf("Target location X: %.2f\n", x)
 
 	y, err := strconv.ParseFloat(data.Get("y"), 64)
 	if err != nil {
 		return nil, errors.New("Invalid Y data")
 	}
-	fmt.Println("Target location Y: ", y)
+	logger.Printf("Target location Y: %.2f\n", y)
 
 	err = ctrl.PlanPath([3]float64{x, y, 0})
 	if err != nil {
