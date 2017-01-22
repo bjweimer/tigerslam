@@ -105,6 +105,7 @@ func (a *AstarPlanner) PlanPath(from, to [3]float64) (*path.Path, error) {
 
 		// Check if we have now reached the goal node
 		if current.mapIndex == a.goalIndex {
+			fmt.Println("")
 			logger.Printf("Successfully planned an A* path to the goal after %d iterations!\n", i)
 			return a.reconstructPath(current), nil
 		}
@@ -256,6 +257,10 @@ func (a *AstarPlanner) reconstructPath(endNode *Node) *path.Path {
 
 	p.Smooth(config.ASTAR_SMOOTHING_DATA_WEIGHT, config.ASTAR_SMOOTHING_SMOOTH_WEIGHT, 0.001)
 	p.Simplify()
+
+	pathlen := len(p.Poses)
+
+	logger.Printf("Path length = %v nodes\n\n", pathlen)
 
 	return p
 }
