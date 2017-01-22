@@ -79,7 +79,7 @@ func (ws *WebServer) Serve() {
 		ws.pageHandler(w, r)
 	}))
 
-	logger.Printf("Web server now serving at %s!", config.WEB_ADDRESS)
+	logger.Printf("Web server now serving at %s!\n\n", config.WEB_ADDRESS)
 	http.ListenAndServe(config.WEB_ADDRESS, nil)
 }
 

@@ -529,7 +529,8 @@ func SetMotorDeletePath(w http.ResponseWriter, ctrl *controller.Controller, data
 }
 
 func SetMotorGoTo(w http.ResponseWriter, ctrl *controller.Controller, data url.Values) ([]byte, error) {
-	logger.Println("SetMotorGoTo initiated!")
+	fmt.Println("")
+	// logger.Println("SetMotorGoTo initiated!")
 
 	x, err := strconv.ParseFloat(data.Get("x"), 64)
 	if err != nil {

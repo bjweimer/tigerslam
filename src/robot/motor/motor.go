@@ -192,7 +192,7 @@ func (m *MotorController) FollowPath(slamAlg slam.Slam) {
 					// done backing, to get a good start coordinate.
 					wg := new(sync.WaitGroup)
 					wg.Add(1)
-					time.AfterFunc(4*time.Second, func() {
+					time.AfterFunc(2*time.Second, func() {
 						logger.Println("Stopping backing")
 						m.motor.SetSpeeds(0, 0)
 						wg.Done()
@@ -256,12 +256,12 @@ func (m *MotorController) followSubPath(collisionDetector *collisionavoidance.Co
 
 					// Detected an obstacle, so stop the motors, wait for resume
 					m.motor.SetSpeeds(0, 0)
-					logger.Println("Detected obstacle: stopping.")
+					// logger.Println("Detected obstacle: stopping.")
 					timer := time.NewTimer(5 * time.Second)
 					select {
 					case <-collisionDetector.ResumeChan:
 						// continue
-						logger.Println("Resuming: obstacle gone.")
+						// logger.Println("Resuming: obstacle gone.")
 					case <-timer.C:
 						collisionDetector.Reset()
 						logger.Println("Aborting path")
@@ -284,6 +284,7 @@ func (m *MotorController) followSubPath(collisionDetector *collisionavoidance.Co
 
 			// Get the speed update
 			pos := slamAlg.GetPosition()
+			//logger.Printf("followSubPath: Current Position is X = %.3v Y = %.3v Theta = %.3v\n", pos.X, pos.Y, pos.Theta)
 			v_l, v_r, finished := follower.SpeedUpdate([3]float64{pos.X, pos.Y, pos.Theta})
 
 			// If we're finished

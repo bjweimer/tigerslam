@@ -76,7 +76,7 @@ func (c *CollisionDetector) Start() {
 	// Run the routine until Stop() is called (return)
 	go c.checkRoutine()
 
-	logger.Println("Collision avoidance started")
+	// logger.Println("Collision avoidance started")
 }
 
 func (c *CollisionDetector) Stop() {

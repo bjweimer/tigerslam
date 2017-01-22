@@ -140,7 +140,7 @@ x: <span data-role="position-x"></span> m, y: <span data-role="position-y"></spa
 			<a href="#" class="btn btn-primary" data-role="save-and-close">Save map</a>
 		</div>
 	</div>
-	
+
 </div>
 {{end}}
 
@@ -162,20 +162,20 @@ x: <span data-role="position-x"></span> m, y: <span data-role="position-y"></spa
 	<script type="text/javascript">
 		var map;
 		var slamstats;
-	
+
 		$(document).ready(function() {
 			var log = new $.log($(".log"), {'rate': {{.DATA.LOG_UPDATE_RATE}} } );
 			log.Start();
-			
+
 			map = createSlamMap({{.DATA.CONTROLLER.SlamController.GetSlam.GetMapSizeMeters}});
-			
+
 			// Wait until map is fully loaded
 			google.maps.event.addListenerOnce(map, 'idle', function() {
 				slamstats = new $.slamstats(map, {
 					pullRate: 1000,
 					mapUpdateDistanceDiff: 5.0,
 					mapOffset: {
-						X: {{.DATA.CONTROLLER.SlamController.GetSlam.GetOffsetX}}, 
+						X: {{.DATA.CONTROLLER.SlamController.GetSlam.GetOffsetX}},
 						Y: {{.DATA.CONTROLLER.SlamController.GetSlam.GetOffsetY}}
 					},
 					trace: {
@@ -190,18 +190,18 @@ x: <span data-role="position-x"></span> m, y: <span data-role="position-y"></spa
 						toggler: $("#robot-toggler"),
 						physical: [
 							[
-								{X: -0.5, Y: -0.25}, {X: 0.5, Y: -0.25},
-								{X: 0.5, Y: 0.25}, {X: -0.5, Y: 0.25}
+								{X: -0.375, Y: -0.25}, {X: 0.125, Y: -0.25},
+								{X: 0.125, Y: 0.25}, {X: -0.375, Y: 0.25}
 							],
 							[
-								{X: 0.25, Y: -0.25}, {X: 0.5, Y: 0}, {X: 0.25, Y: 0.25}
+								{X: -0.08, Y: -0.1}, {X: 0.08, Y: 0}, {X: -0.08, Y: 0.1}
 							]
 						],
-						fillColor: "#0000FF",
-						fillOpacity: 0.10,
-						strokeColor: "#0000FF",
-						strokeOpacity: 0.8,
-						strokeWeight: 0.2,
+						fillColor: "#000000",
+						fillOpacity: 0.80,
+						strokeColor: "#FFFFFF",
+						strokeOpacity: 0.99,
+						strokeWeight: 0.99,
 					},
 					follow: {
 						toggler: $("#follow-toggler"),
@@ -209,7 +209,7 @@ x: <span data-role="position-x"></span> m, y: <span data-role="position-y"></spa
 				});
 				slamstats.Start();
 			})
-			
+
 		});
 	</script>
 {{end}}
