@@ -78,9 +78,9 @@ func (m *Motor) Connect() error {
 		return err
 	}
 
-	logger.Println("Motor connected.")
-	//fmt.Printf("COM = %q\n", m.config.Name)
-	//fmt.Printf("Baud = %d\n\n", m.config.Baud)
+	// logger.Println("Motor connected.")
+	// fmt.Printf("COM = %q\n", m.config.Name)
+	// fmt.Printf("Baud = %d\n\n", m.config.Baud)
 	m.port = s
 
 	return nil
