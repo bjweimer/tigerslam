@@ -61,6 +61,8 @@ func (l *Lookahead) SpeedUpdate(pos [3]float64) (left, right float64, finished b
 		finished = false
 	}
 
+	//logger.Printf("Current Position: X = %.3v  Y = %.3v  Theta = %.3v\n", pos[0], pos[1], pos[2])
+
 	// Get course angle and along-track distance
 	chi_d, s := l.courseAngle(pointA, pointB, [2]float64{pos[0], pos[1]})
 
@@ -68,6 +70,7 @@ func (l *Lookahead) SpeedUpdate(pos [3]float64) (left, right float64, finished b
 	// (takes effect on next update)
 	if s > l.segmentDistance(pointA, pointB)-config.LOOKAHEAD_DISTANCE/2 {
 		l.currIndex++
+		//	logger.Printf("Current Line Segment Index = %v, e_chi = %v\n", l.currIndex, chi_d-pos[2])
 	}
 
 	// We now have the desired course angle chi_d, and can compare this to the
@@ -75,15 +78,41 @@ func (l *Lookahead) SpeedUpdate(pos [3]float64) (left, right float64, finished b
 	// Compute the error angle.
 	e_chi := utils.NormalizeAngle(chi_d - pos[2])
 
+	//logger.Printf("Index = %v and e_chi = %.3v\n", l.currIndex, e_chi)
+
+	// BJW CODE: Limit e_chi to -1.57 to +1.57 range (i.e. -/+ 90 degrees).
+	if e_chi < -1.57 {
+		e_chi = -1.57
+	}
+
+	if e_chi > 1.57 {
+		e_chi = 1.57
+	}
+
+	// BJW CODE: If e_chi is negative, turn clockwise; otherwise turn counterclockwise.
+	if e_chi <= 0 {
+		//logger.Printf("Clockwise: Index = %v and e_chi = %.3v\n", l.currIndex, e_chi)
+		left = ((25.0 / 157.0) * e_chi) + 0.5
+		right = ((75.0 / 157.0) * e_chi) + 0.5
+		//logger.Printf("left = %v and right = %v\n\n", left, right)
+	} else {
+		//logger.Printf("Counterclockwise: Index = %v and e_chi = %.3v\n", l.currIndex, e_chi)
+		left = ((-75.0 / 157.0) * e_chi) + 0.5
+		right = ((-25.0 / 157.0) * e_chi) + 0.5
+		//logger.Printf("left = %v and right = %v\n\n", left, right)
+	}
+
 	// We can now caluclate a "delta_rl", i.e. a difference between the
 	// control signals to right and left wheels (right - left), which should
 	// be used, as simply p*e_chi. P is the proportional factor in a PID
 	// controller.
-	delta_rl := config.LOOKAHEAD_P * e_chi
+	// ORIGINAL CODE: delta_rl := config.LOOKAHEAD_P * e_chi
+
+	//logger.Println("delta_rl = ", delta_rl)
 
 	// Split the delta into two parts, add speed
-	right = 0.5*delta_rl + config.LOOKAHEAD_U
-	left = -0.5*delta_rl + config.LOOKAHEAD_U
+	// ORIGINAL CODE: right = 0.5*delta_rl + config.LOOKAHEAD_U
+	// ORIGINAL CODE: left = -0.5*delta_rl + config.LOOKAHEAD_U
 
 	return
 
