@@ -59,7 +59,9 @@ func read_int64(data []byte) (ret int64) {
 
 //  readLidar opens communication with the Neato lidar and then continuously reads data into lidardist[]
 func readLidar() {
-	c := &serial.Config{Name: "COM4", Baud: 115200}
+	//fmt.Printf("Lidar COM = %v\n", config.LIDAR_COM_NAME)
+	//c := &serial.Config{Name: "COM4", Baud: 115200}
+	c := &serial.Config{Name: config.LIDAR_COM_NAME, Baud: 115200}
 	s, _ := serial.OpenPort(c)
 	buf := make([]byte, 1980)
 
