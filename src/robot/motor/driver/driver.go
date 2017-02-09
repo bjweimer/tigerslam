@@ -71,7 +71,9 @@ func MakeDefaultMotor() *Motor {
 // Set up the connection to the motor driver card over serial interface.
 func (m *Motor) Connect() error {
 	// Original: s, err := serial.OpenPort(m.config)
-	c := &serial.Config{Name: "COM6", Baud: 115200}
+	logger.Printf("Motor connected on COM = %v\n", config.MOTORS_COM_NAME)
+	//c := &serial.Config{Name: "COM6", Baud: 115200}
+	c := &serial.Config{Name: config.MOTORS_COM_NAME, Baud: 115200}
 	s, err := serial.OpenPort(c)
 	time.Sleep(time.Second)
 	if err != nil {
