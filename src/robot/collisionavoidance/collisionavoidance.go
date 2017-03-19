@@ -64,12 +64,24 @@ func (c *CollisionDetector) Start() {
 	// Subscribe to LIDAR readings
 	c.lidarChan = lidar.LidarSensor.Subscribe()
 
-	nPerDeg := float64(lidar.LidarSensor.Distances) / lidar.LidarSensor.RadialSpan
+	// This was the original code for calculating the starting and stopping indices for a given
+	// collision avoidance radial span using the original lidar laser.
+	//nPerDeg := float64(lidar.LidarSensor.Distances) / lidar.LidarSensor.RadialSpan
+	//
+	// nPerRad := nPerDeg * 180 / math.Pi
+	//
+	// c.minIndex = lidar.LidarSensor.Distances/2 - int(nPerRad*c.angle/2)
+	// c.maxIndex = lidar.LidarSensor.Distances/2 + int(nPerRad*c.angle/2)
 
-	nPerRad := nPerDeg * 180 / math.Pi
+	// This is the corrected code for calculating the starting and stopping indices for a given
+	// collision avoidance radial span using an XV Neato Lidar laser.
+	deg := config.COLLISION_DETECTION_ANGLE * 180 / math.Pi
+	c.minIndex = int(127 - deg/2)
+	c.maxIndex = int(127 + deg/2)
 
-	c.minIndex = lidar.LidarSensor.Distances/2 - int(nPerRad*c.angle/2)
-	c.maxIndex = lidar.LidarSensor.Distances/2 + int(nPerRad*c.angle/2)
+	// BJW debugging
+	logger.Printf("Set Min lidar index = %v\n", c.minIndex)
+	logger.Printf("Set Max lidar index = %v\n\n", c.maxIndex)
 
 	c.stopRoutineChan = make(chan bool)
 
@@ -131,7 +143,7 @@ func (c *CollisionDetector) checkRoutine() {
 				// case c.StopChan <- true:
 				// default:
 				// }
-				logger.Println("!Detected obstacle!")
+				// logger.Println("!Detected obstacle!")
 			}
 		}
 	}
@@ -139,9 +151,14 @@ func (c *CollisionDetector) checkRoutine() {
 
 // Check if the area is occupied (one or more laser beams are stopping)
 func (c *CollisionDetector) areaOccupied(lr *lidar.LidarReading) bool {
+	// BJW debugging
+	// logger.Printf("Using Min lidar index = %v\n", c.minIndex)
+	// logger.Printf("Using Max lidar index = %v\n\n", c.maxIndex)
+
 	// Check if there's anything within that area
 	for i := c.minIndex; i < c.maxIndex; i++ {
 		if lr.Distances[i] > 10 && lr.Distances[i] < c.radius*1000 {
+			// logger.Printf("Detected obstacle at index = %v\nDistance = %v\n\n", i, lr.Distances[i])
 			return true
 		}
 	}
