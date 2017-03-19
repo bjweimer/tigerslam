@@ -52,6 +52,7 @@ func (l *Lookahead) SetPath(p *path.Path) {
 // finished, the flag "finished" will be set. Otherwise, the left and right
 // return float64s will assume some values [-1, 1].
 func (l *Lookahead) SpeedUpdate(pos [3]float64) (left, right float64, finished bool) {
+	k := 0.56 // Set the scale constant for motor PID
 
 	// Get the points. If this fails, we're finished.
 	pointA, pointB, err := l.getPoints()
@@ -89,16 +90,18 @@ func (l *Lookahead) SpeedUpdate(pos [3]float64) (left, right float64, finished b
 		e_chi = 1.57
 	}
 
+	// This didn't work: k = (-50/157)*math.Abs(e_chi) + 1.0
+
 	// BJW CODE: If e_chi is negative, turn clockwise; otherwise turn counterclockwise.
 	if e_chi <= 0 {
 		//logger.Printf("Clockwise: Index = %v and e_chi = %.3v\n", l.currIndex, e_chi)
-		left = ((25.0 / 157.0) * e_chi) + 0.5
-		right = ((75.0 / 157.0) * e_chi) + 0.5
+		left = k * (((25.0 / 157.0) * e_chi) + 0.5)
+		right = k * (((75.0 / 157.0) * e_chi) + 0.5)
 		//logger.Printf("left = %v and right = %v\n\n", left, right)
 	} else {
 		//logger.Printf("Counterclockwise: Index = %v and e_chi = %.3v\n", l.currIndex, e_chi)
-		left = ((-75.0 / 157.0) * e_chi) + 0.5
-		right = ((-25.0 / 157.0) * e_chi) + 0.5
+		left = k * (((-75.0 / 157.0) * e_chi) + 0.5)
+		right = k * (((-25.0 / 157.0) * e_chi) + 0.5)
 		//logger.Printf("left = %v and right = %v\n\n", left, right)
 	}
 
