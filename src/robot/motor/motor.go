@@ -186,7 +186,7 @@ func (m *MotorController) FollowPath(slamAlg slam.Slam) {
 				} else {
 
 					logger.Println("Starting backing")
-					m.motor.SetSpeeds(-0.9, -0.9)
+					m.motor.SetSpeeds(-0.5, -0.5)
 
 					// We need to wait with the replanning until the robot is
 					// done backing, to get a good start coordinate.
