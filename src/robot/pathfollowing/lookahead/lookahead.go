@@ -52,8 +52,7 @@ func (l *Lookahead) SetPath(p *path.Path) {
 // finished, the flag "finished" will be set. Otherwise, the left and right
 // return float64s will assume some values [-1, 1].
 func (l *Lookahead) SpeedUpdate(pos [3]float64) (left, right float64, finished bool) {
-	k := 0.56 // Set the scale constant for motor PID
-
+	k := 0.5 // Set the scale constant for motor PID during turns and course corrections - see line # 93 below
 	// Get the points. If this fails, we're finished.
 	pointA, pointB, err := l.getPoints()
 	if err != nil {
@@ -88,6 +87,11 @@ func (l *Lookahead) SpeedUpdate(pos [3]float64) (left, right float64, finished b
 
 	if e_chi > 1.57 {
 		e_chi = 1.57
+	}
+
+	// This lets the robot go faster on straightaways ***********************************************************
+	if math.Abs(e_chi) < 0.05 {
+		k = 1.0
 	}
 
 	// This didn't work: k = (-50/157)*math.Abs(e_chi) + 1.0
