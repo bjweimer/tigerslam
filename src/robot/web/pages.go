@@ -209,9 +209,11 @@ func settingsPage() (*Page, error) {
 		}
 	}
 
+	// fmt.Println(settings["default"])
+
 	return &Page{
 		"settings.html",
 		template.FuncMap{},
-		settings,
+		settings["default"], // was just: settings,
 	}, nil
 }
