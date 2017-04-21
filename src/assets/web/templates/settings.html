@@ -2,22 +2,50 @@
 	<h2>Settings</h2>
 	<table class="table">
 		<tr>
-			<th>Key</th>
+			<th>Parameter</th>
 			<th>Value</th>
 		</tr>
 		<tr>
-			<td>Max robot speed (m/s)</td>
-			<td>{{.DATA.MAX_SPEED}}</td>
+			<td>CONFIG file location</td>
+			<td>{{.DATA.assets_root}}</td>
+		</tr>
+		<tr>
+		    <td></td>
+		    <td></td>
+		</tr>
+		<tr>
+		    <td>Lidar COM port</td>
+		    <td>{{.DATA.lidar_com_name}}
+		</tr>
+		<tr>
+		    <td>Motors COM port</td>
+		    <td>{{.DATA.motors_com_name}}</td>
+		</tr>
+		<tr>
+		    <td></td>
+		    <td></td>
+		</tr>
+		<tr>
+		    <td>Collision detection radius (meters)</td>
+		    <td>{{.DATA.collision_detection_radius}}</td>
+		</tr>
+		<tr>
+		    <td>Collision detection angle (radians)</td>
+		    <td>{{.DATA.collision_detection_angle}}</td>
+		</tr>
+		<tr>
+		    <td></td>
+		    <td></td>
 		</tr>
 	</table>
 {{end}}
 
 {{define "sidebar"}}
-	
+
 {{end}}
 
 {{define "footer"}}
-	
+
 {{end}}
 
 {{define "javascript"}}
